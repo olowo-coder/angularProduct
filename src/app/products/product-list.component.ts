@@ -5,23 +5,22 @@ import { ProductService } from "./product.service";
 
 
 @Component({
-    selector: "pm-products",
     templateUrl: "./product-list.component.html",
     styleUrls: ["./product-list.component.css"]
 })
 export class ProductListComponent implements OnInit, OnDestroy{
 
   constructor(private productService: ProductService){}
- 
 
-  
+
+
     pageTitle: string = "Product List";
     imageWidth: number = 50;
     imageMargin: number = 2;
     showImage: boolean = false;
     errorMessge: string = '';
     sub!: Subscription;
-   
+
     ngOnInit(): void {
       console.log("On OnInit");
       this.sub = this.productService.getProducts().subscribe({
@@ -31,7 +30,7 @@ export class ProductListComponent implements OnInit, OnDestroy{
         },
         error: err => this.errorMessge = err
       });
-  
+
     }
 
     ngOnDestroy(): void {
@@ -63,7 +62,7 @@ export class ProductListComponent implements OnInit, OnDestroy{
 
       performFilter(filterBy: string): IProduct[] {
           filterBy = filterBy.toLocaleLowerCase();
-          return this.products.filter((product: IProduct) => 
+          return this.products.filter((product: IProduct) =>
           product.productName.toLocaleLowerCase().includes(filterBy));
       }
 }
